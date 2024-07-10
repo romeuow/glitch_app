@@ -1,1 +1,1 @@
-gunicorn wpp_sdk:app -w logfile --log-file -
+gunicorn wpp_sdk:app -w 1 --log-file -
