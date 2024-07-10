@@ -41,15 +41,18 @@ class WhatAppSDK:
         self.logger = logging.getLogger(__name__)
         
         self.WHATSAPP_API_VERSION=os.getenv('WHATSAPP_API_VERSION')
-        self.WHATSAPP_API_TOKEN = f'Bearer {os.getenv('WHATSAPP_API_TOKEN')}'
+        self.WHATSAPP_API_TOKEN = 'Bearer {0}'.format(os.getenv('WHATSAPP_API_TOKEN'))
+        # self.WHATSAPP_API_TOKEN = f'Bearer {os.getenv('WHATSAPP_API_TOKEN')}'
         self.WHATSAPP_TEST_NUMBER_ID = os.getenv('WHATSAPP_TEST_NUMBER_ID')
-        self.WHATSAPP_URL = f'https://graph.facebook.com/{self.WHATSAPP_API_VERSION}/{self.WHATSAPP_TEST_NUMBER_ID}/messages'
+        self.WHATSAPP_URL = 'https://graph.facebook.com/{0}/{1}/messages'.format(self.WHATSAPP_API_VERSION, self.WHATSAPP_TEST_NUMBER_ID)
+        # self.WHATSAPP_URL = f'https://graph.facebook.com/{self.WHATSAPP_API_VERSION}/{self.WHATSAPP_TEST_NUMBER_ID}/messages'
 
     @app.route('/webhook', methods=['GET'])
     async def webhook(self, request):
 
-        self.logger.info(f'==========\nIncoming webwook message\n==========\n\n')
-        self.logger.info(f'msg body:\n{jsonify(request['body'])}')
+        self.logger.info('==========\nIncoming webwook message\n==========\n\n')
+        self.logger.info('msg body:\n{0}').format(jsonify(request['body']))
+        # self.logger.info(f'msg body:\n{jsonify(request['body'])}')
 
         # Aceita apenas mensagens do tipo text
         if request['body']['type'] != 'text':
